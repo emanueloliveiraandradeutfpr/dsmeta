@@ -15,11 +15,15 @@ function SalesCard() {
     const [maxDate, setMaxDate] = useState(max);
 
     const [sales, setSales] = useState<Sale[]>([]);
+
     useEffect(() => {
-        axios.get(`${BASE_URL}/sales`).then((response) => {
-            setSales(response.data.content);
-        });
-    }, []);
+        const dtmin = minDate.toISOString().slice(0, 10);
+        const dtmax = maxDate.toISOString().slice(0, 10);
+        axios.get(`${BASE_URL}/sales?minDate=${dtmin}&maxDate=${dtmax}`)
+            .then((response) => {
+                setSales(response.data.content);
+            });
+    }, [minDate, maxDate]);
 
     return (
         <>
@@ -74,10 +78,7 @@ function SalesCard() {
                                         </td>
                                     </tr>
                                 );
-                            })}
-                            <div className="dsmeta-red-btn-container">
-                                <NotificationButton />
-                            </div>
+                            })}                        
                         </tbody>
                     </table>
                 </div>
