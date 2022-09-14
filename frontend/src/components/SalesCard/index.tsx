@@ -13,9 +13,9 @@ function SalesCard() {
   const [maxDate, setMaxDate] = useState(max);
 
   useEffect( () => {
-	axios.get("http://localhost:8080/sales").then(resp =>{
-		console.log(resp.data);
-	})
+	axios.get("http://localhost:8080/sales").then(response =>{
+		console.log(response.data);
+	})  
   }, [])
 
   return (
